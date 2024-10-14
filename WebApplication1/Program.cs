@@ -9,7 +9,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();
 builder.Services.AddScoped<IFacturaRepository, FacturaRepository>();
-
+builder.Services.AddScoped<IProductoRepository, ProductoRepository>();
+builder.Services.AddScoped<ICarritoRepository, CarritoRepository>();
 
 builder.Services.AddControllers()
             .AddJsonOptions(options =>

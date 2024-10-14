@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Prueba_Técnica.TuDbContex;
 
@@ -11,9 +12,11 @@ using Prueba_Técnica.TuDbContex;
 namespace Prueba_Técnica.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241014055233_v6")]
+    partial class v6
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -21,53 +24,6 @@ namespace Prueba_Técnica.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
-
-            modelBuilder.Entity("Prueba_Técnica.Entidades.Carrito", b =>
-                {
-                    b.Property<int>("CartItemId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CartItemId"));
-
-                    b.Property<DateTime?>("FechaAgregado")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("ImagenUrl")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Nombre")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<decimal?>("Precio")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<int?>("ProductoId")
-                        .HasColumnType("int");
-
-                    b.HasKey("CartItemId");
-
-                    b.ToTable("Carritos");
-                });
-
-            modelBuilder.Entity("Prueba_Técnica.Entidades.Categoria", b =>
-                {
-                    b.Property<int>("CategoriaId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CategoriaId"));
-
-                    b.Property<string>("Nombre")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("imagen")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("CategoriaId");
-
-                    b.ToTable("Categorias");
-                });
 
             modelBuilder.Entity("Prueba_Técnica.Entidades.DetalleFactura", b =>
                 {
@@ -131,33 +87,6 @@ namespace Prueba_Técnica.Migrations
                     b.ToTable("Facturas");
                 });
 
-            modelBuilder.Entity("Prueba_Técnica.Entidades.Producto", b =>
-                {
-                    b.Property<int>("ProductoId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ProductoId"));
-
-                    b.Property<int?>("CategoriaId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("ImagenUrl")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Nombre")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<decimal?>("Precio")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.HasKey("ProductoId");
-
-                    b.HasIndex("CategoriaId");
-
-                    b.ToTable("Productos");
-                });
-
             modelBuilder.Entity("Prueba_Técnica.Entidades.Usuario", b =>
                 {
                     b.Property<int>("UsuarioId")
@@ -188,18 +117,6 @@ namespace Prueba_Técnica.Migrations
                     b.HasOne("Prueba_Técnica.Entidades.Factura", null)
                         .WithMany("Detalles")
                         .HasForeignKey("FacturaId");
-                });
-
-            modelBuilder.Entity("Prueba_Técnica.Entidades.Producto", b =>
-                {
-                    b.HasOne("Prueba_Técnica.Entidades.Categoria", null)
-                        .WithMany("Productos")
-                        .HasForeignKey("CategoriaId");
-                });
-
-            modelBuilder.Entity("Prueba_Técnica.Entidades.Categoria", b =>
-                {
-                    b.Navigation("Productos");
                 });
 
             modelBuilder.Entity("Prueba_Técnica.Entidades.Factura", b =>
