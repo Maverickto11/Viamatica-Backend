@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Prueba_Técnica.TuDbContex;
 
@@ -11,9 +12,11 @@ using Prueba_Técnica.TuDbContex;
 namespace Prueba_Técnica.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241016154458_v22")]
+    partial class v22
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -22,7 +25,7 @@ namespace Prueba_Técnica.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("BackendProyecto.Entidades.AutenticacionRespuesta", b =>
+            modelBuilder.Entity("BackendProyecto.Entidades.Usuario", b =>
                 {
                     b.Property<int>("id")
                         .ValueGeneratedOnAdd()

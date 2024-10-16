@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using BackendProyecto.Entidades;
+using Microsoft.EntityFrameworkCore;
 using Prueba_Técnica.Entidades;
 using System;
 using System.Collections.Generic;
@@ -9,9 +10,11 @@ using System.Threading.Tasks;
 namespace Prueba_Técnica.Repositorio
 {
     public interface ILoginRepository
-    {
-        Task<Usuario> AutenticarUsuario(string nombreUsuario, string contraseña);
+    { 
 
+        Task<AutenticacionRespuesta> Logins(string email, string contrasena);
+
+        Task Register(AutenticacionRespuesta nombre);
 
     }
 }

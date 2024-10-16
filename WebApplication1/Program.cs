@@ -5,12 +5,14 @@ using Prueba_Técnica.TuDbContex;
 
 var builder = WebApplication.CreateBuilder(args);
 
+
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();
 builder.Services.AddScoped<IFacturaRepository, FacturaRepository>();
 builder.Services.AddScoped<IProductoRepository, ProductoRepository>();
 builder.Services.AddScoped<ICarritoRepository, CarritoRepository>();
+builder.Services.AddScoped<ILoginRepository, LoginRepository>();
 
 builder.Services.AddControllers()
             .AddJsonOptions(options =>
@@ -37,7 +39,13 @@ builder.Services.AddCors(options =>
 });
 // Add Swagger services
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddRazorPages();
+builder.Services.AddSwaggerGen(c =>
+
+
+{
+    c.SwaggerDoc("v1", new OpenApiInfo { Title = "API de Biblioteca", Version = "v1" });
+});
 
 
 var app = builder.Build();

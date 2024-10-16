@@ -1,4 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using BackendProyecto.Entidades;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Prueba_Técnica.Entidades;
 using Prueba_Técnica.TuDbContex;
 using System;
@@ -9,41 +11,32 @@ using System.Threading.Tasks;
 
 namespace Prueba_Técnica.Repositorio
 {
-    public class LoginRepository: ILoginRepository
+    public class LoginRepository : ILoginRepository
     {
-        public readonly AppDbContext _context;
 
+        private readonly AppDbContext _context;
         public LoginRepository(AppDbContext context)
         {
-            _context = context;
+            _context = context; 
         }
-        public async Task<Usuario> AutenticarUsuario(string nombreUsuario, string contraseña)
+
+        public async Task<AutenticacionRespuesta> Logins(string correo, string contrasena)
         {
-            // Busca el usuario en la base de datos
-            var usuario = await _context.Usuarios
-                .FirstOrDefaultAsync(u => u.NombreUsuario == nombreUsuario);
-
-            if (usuario == null)
-            {
-                return null; // Usuario no encontrado
-            }
-
-            // Aquí deberías verificar la contraseña (por ejemplo, usando hash)
-            // Supongamos que tienes una función para verificar el hash
-            if (!VerificarContraseña(contraseña, usuario.clave))
-            {
-                return null; // Contraseña incorrecta
-            }
-
-            return usuario; // Autenticación exitosa
+            return await _context.AutenticacionRespuestas
+                                 .FirstOrDefaultAsync(u => u.correo == correo &&  u.contrasena == contrasena);
         }
 
-        private bool VerificarContraseña(string contraseña, string hash)
+
+        public async Task Register([FromBody] AutenticacionRespuesta nombre)
         {
-            // Aquí implementa la lógica para verificar la contraseña
-            // Ejemplo: usar un algoritmo de hash para comparar
-            return contraseña == hash; // Esta es solo una comparación básica
+            _context.AutenticacionRespuestas.Add(nombre);
+            await _context.SaveChangesAsync();
+
         }
+
+
+
+
+
     }
 }
-
