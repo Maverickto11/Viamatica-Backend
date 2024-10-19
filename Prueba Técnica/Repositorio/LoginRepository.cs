@@ -34,7 +34,11 @@ namespace Prueba_Técnica.Repositorio
 
         }
 
-
+        public async Task<AutenticacionRespuesta> ObtenerUsuarioPorCorreo(string correo)
+        {
+            return await _context.AutenticacionRespuestas
+                                 .FirstOrDefaultAsync(u => u.correo == correo);
+        }
 
 
 

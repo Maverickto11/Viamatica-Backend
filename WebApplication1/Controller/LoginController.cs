@@ -24,11 +24,16 @@ namespace WebApplication1.Controllers
                 return BadRequest("Información inválida.");
             }
 
-
+            var usuarioExistente = await _usuarioRepository.ObtenerUsuarioPorCorreo(autenticacionRespuesta.correo);
+            if (usuarioExistente != null)
+            {
+                return Conflict(new { message = "El correo ya está registrado." });
+            }
 
             // Registrar el nuevo usuario.
             await _usuarioRepository.Register(autenticacionRespuesta);
-            return Ok("Usuario registrado exitosamente.");
+            var response = new { message = "Usuario registrado exitosamente." };
+            return Ok(response);
         }
 
 

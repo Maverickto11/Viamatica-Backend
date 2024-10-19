@@ -14,7 +14,8 @@ namespace BackendProyecto.Entidades
         public int id { get; set; }
 
         public string? nombre { get; set; }
-
+        
+        [EmailAddress]
         public string? correo { get; set; }
         public string contrasena { get; set; }
     }

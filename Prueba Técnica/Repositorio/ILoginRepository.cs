@@ -16,5 +16,7 @@ namespace Prueba_Técnica.Repositorio
 
         Task Register(AutenticacionRespuesta nombre);
 
+        Task<AutenticacionRespuesta> ObtenerUsuarioPorCorreo(string email);
+
     }
 }
