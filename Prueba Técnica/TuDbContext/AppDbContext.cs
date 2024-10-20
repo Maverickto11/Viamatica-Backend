@@ -25,19 +25,18 @@ namespace Prueba_Técnica.TuDbContex
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-         
-
+            // Configurar la relación entre Categoria y Producto
             modelBuilder.Entity<Categoria>()
-          .HasMany(p => p.Productos)
+                .HasMany(p => p.Productos)
                 .WithOne()
-          .HasForeignKey(p => p.CategoriaId);
+                .HasForeignKey(p => p.CategoriaId);
 
-            modelBuilder.Ignore<AutenticacionRespuesta>();
+            // Eliminar la instrucción que ignora AutenticacionRespuesta
+            // modelBuilder.Ignore<AutenticacionRespuesta>();
 
-
-            /*---------------------------------------------------*/
+            // Configurar las propiedades de la entidad AutenticacionRespuesta
             modelBuilder.Entity<AutenticacionRespuesta>()
-                .Property(s => s.nombre )
+                .Property(s => s.nombre)
                 .IsRequired()
                 .HasMaxLength(50);
 
@@ -50,9 +49,8 @@ namespace Prueba_Técnica.TuDbContex
                 .Property(s => s.correo)
                 .IsRequired()
                 .HasMaxLength(255);
-
-
         }
+
 
     }
 }

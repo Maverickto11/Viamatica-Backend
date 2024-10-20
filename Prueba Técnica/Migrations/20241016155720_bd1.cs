@@ -23,7 +23,7 @@ namespace Prueba_Técnica.Migrations
             { 6, "Libros", "https://climatica.coop/wp-content/uploads/2024/01/1280px-Books_HD_8314929977-900x600.jpg?w=390&q=90" },
             { 7, "Deportes", "https://blog.saludsa.com/hs-fs/hubfs/Imagenes%20Blog/shutterstock_1026630514%20(1).jpg?width=770&height=424&name=shutterstock_1026630514%20(1).jpg" },
             { 8, "Hogar", "https://cdn.prod.website-files.com/6643a82fc46ca462b5ef9921/6643a82fc46ca462b5efa47c_649da5102ac93810b22611b2_27-10-articulos-de-adulto-independiente-que-no-pueden-faltar-en-tu-hogar.webp" }
-        });
+        });    
         }
 
         /// <inheritdoc />
@@ -33,6 +33,8 @@ namespace Prueba_Técnica.Migrations
        table: "Categorias",
        keyColumn: "CategoriaId",
        keyValues: new object[] { 1, 2, 3, 4, 5, 6, 7, 8 });
-        }
+                        
+    }
+
     }
 }
